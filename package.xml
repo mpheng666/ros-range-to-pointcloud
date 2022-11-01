@@ -1,16 +1,15 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>sam_collision_detection</name>
+  <name>range_to_pointcloud</name>
   <version>0.0.0</version>
-  <description>The sam_collision_detection package</description>
+  <description>The range_to_pointcloud package</description>
 
-  <maintainer email="mpheng@siix-agt.com">mpheng</maintainer>
+  <maintainer email="mpheng@gmail.com">mpheng</maintainer>
 
-  <license>Proprietary</license>
+  <license>GPL-3.0</license>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
-  <build_depend>sam_common_shared</build_depend>
   <build_depend>pcl_conversions</build_depend>
   <build_depend>pcl_ros</build_depend>
   <build_export_depend>roscpp</build_export_depend>
