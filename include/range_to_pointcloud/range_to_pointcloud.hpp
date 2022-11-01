@@ -40,7 +40,10 @@ namespace range_to_pointcloud {
             }
         }
 
-        void operator()(const sensor_msgs::Range::ConstPtr& msg) { range_ = *msg; }
+        void operator()(const sensor_msgs::Range::ConstPtr& msg)
+        {
+            range_ = *msg;
+        }
 
         sensor_msgs::Range getRange() const { return range_; }
 
@@ -63,7 +66,7 @@ namespace range_to_pointcloud {
     private:
         void loadParams();
 
-        int number_of_sensor_{0};
+        int number_of_sensor_{8};
 
         ros::NodeHandle nh_;
         ros::NodeHandle nh_g_;
@@ -72,8 +75,12 @@ namespace range_to_pointcloud {
         std::vector<ros::Subscriber> range_sensors_subs_;
         std::vector<RangeCallBack> range_callbacks_;
 
+        int num_of_populated_point_{6};
+
         void timerPubCallBack(const ros::TimerEvent& e);
-        void populateRangeToPC(const sensor_msgs::Range& range_msg);
+        void populateRangesToPC(
+        const std::vector<
+        std::pair<sensor_msgs::Range, geometry_msgs::TransformStamped>>& ranges_tfs);
     };
 } // namespace range_to_pointcloud
 
