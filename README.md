@@ -25,3 +25,5 @@ This package converts ROS sensor_msgs::Range to sensor_msgs::PointCloud2 for wha
 `roslaunch range_to_pointcloud start.launch use_tf:=true`
 
 3. run `rviz` to visualize it
+
+![alt text](resources/range_to_pointcloud_example.png?raw=true)
