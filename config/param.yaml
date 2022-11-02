@@ -14,5 +14,6 @@ range_sensors_name:
     "sonar_6",
     "sonar_7",
     "sonar_8",
-    "sonar_9",
+    "sonar_10",
+    "sonar_20",
   ]
