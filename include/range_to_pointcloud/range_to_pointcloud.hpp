@@ -24,19 +24,21 @@
 namespace range_to_pointcloud {
     class RangeCallBack {
     public:
-        RangeCallBack(int index)
-            : index_(index)
+        RangeCallBack(const std::string& range_sensor_name,
+                      const std::string& target_frame)
+            : range_sensor_name_(range_sensor_name)
+            , target_frame_(target_frame)
         {
             tf2_ros::Buffer tfBuffer;
             tf2_ros::TransformListener tfListener(tfBuffer);
-            std::string frame = "sonar_" + std::to_string(index_) + "_link";
+            std::string frame = range_sensor_name_ + "_link";
 
             try {
                 transformStamped_baselink_sonar_ = tfBuffer.lookupTransform(
-                "base_link", frame, ros::Time(0), ros::Duration(1.0));
+                target_frame_, frame, ros::Time(0), ros::Duration(1.0));
             }
             catch (tf2::TransformException& ex) {
-                ROS_WARN("%s", ex.what());
+                ROS_WARN_STREAM(ex.what() << "Check " << range_sensor_name << " tf is set properly!");
             }
         }
 
@@ -53,7 +55,8 @@ namespace range_to_pointcloud {
         }
 
     private:
-        int index_;
+        std::string range_sensor_name_;
+        std::string target_frame_;
         sensor_msgs::Range range_;
         geometry_msgs::TransformStamped transformStamped_baselink_sonar_;
     };
@@ -72,15 +75,20 @@ namespace range_to_pointcloud {
         ros::NodeHandle nh_g_;
         ros::Timer pub_timer_;
         ros::Publisher pointcloud_pub_;
-        std::vector<ros::Subscriber> range_sensors_subs_;
         std::vector<RangeCallBack> range_callbacks_;
+        std::vector<ros::Subscriber> range_sensors_subs_;
 
-        int num_of_populated_point_{6};
+        int number_of_points_per_side_{6};
+        std::string target_frame_{"base_link"};
+        bool populate_z_{false};
+        bool use_defined_tf_{false};
+        std::vector<std::string> range_sensors_name_{"range_sensor_1"};
 
         void timerPubCallBack(const ros::TimerEvent& e);
         void populateRangesToPC(
         const std::vector<
-        std::pair<sensor_msgs::Range, geometry_msgs::TransformStamped>>& ranges_tfs);
+        std::pair<sensor_msgs::Range, geometry_msgs::TransformStamped>>&
+        ranges_tfs);
     };
 } // namespace range_to_pointcloud
 

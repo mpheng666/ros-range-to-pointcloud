@@ -3,12 +3,11 @@
 
     <arg name="use_tf" default="true" />
 
-    <group unless="$(arg use_tf)">
-        <node pkg="tf2_ros" type="static_transform_publisher" name="sonar_1_broadcaster" args="1 0 0 0 0 0 base_link sonar_1_link" />
 
-        <node pkg="tf2_ros" type="static_transform_publisher" name="sonar_2_broadcaster" args="-1 0 0 3.14159 0 0 base_link sonar_2_link" />
-    </group>
+    <group unless="$(arg use_tf)"></group>
 
-    <node pkg="range_to_pointcloud" name="range_to_pointcloud_node" type="range_to_pointcloud_node" output="screen" />
+    <node pkg="range_to_pointcloud" name="range_to_pointcloud_node" type="range_to_pointcloud_node" output="screen">
+        <rosparam command="load" file="$(find range_to_pointcloud)/config/param.yaml" />
+    </node>
 
 </launch>

@@ -1,1 +1,18 @@
-number_of_points: 10
+number_of_points_per_side: 5
+target_frame: "base_link"
+populate_z: true
+use_defined_tf: false
+# This will be used for subscribed topic names and range sensor link name
+# Add or remove based on robot configuration
+range_sensors_name:
+  [
+    "sonar_1",
+    "sonar_2",
+    "sonar_3",
+    "sonar_4",
+    "sonar_5",
+    "sonar_6",
+    "sonar_7",
+    "sonar_8",
+    "sonar_9",
+  ]
