@@ -1,6 +1,13 @@
+# number of populated points per side
+# if(number_of_points_per_side == 5), there will be 11 points produced
 number_of_points_per_side: 5
+
+# target frame for the pointcloud output
 target_frame: "base_link"
+
+# Populated Z axis or not
 populate_z: true
+
 # This will be used for subscribed topic names and range sensor link name
 # Add or remove based on robot configuration
 range_sensors_name:
