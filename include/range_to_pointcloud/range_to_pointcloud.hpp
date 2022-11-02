@@ -63,13 +63,11 @@ namespace range_to_pointcloud {
 
     class RangeToPointCloud {
     public:
-        RangeToPointCloud(ros::NodeHandle& nh, int num);
+        RangeToPointCloud(ros::NodeHandle& nh);
         void start();
 
     private:
         void loadParams();
-
-        int number_of_sensor_{8};
 
         ros::NodeHandle nh_;
         ros::NodeHandle nh_g_;
@@ -81,7 +79,6 @@ namespace range_to_pointcloud {
         int number_of_points_per_side_{6};
         std::string target_frame_{"base_link"};
         bool populate_z_{false};
-        bool use_defined_tf_{false};
         std::vector<std::string> range_sensors_name_{"range_sensor_1"};
 
         void timerPubCallBack(const ros::TimerEvent& e);

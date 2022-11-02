@@ -1,7 +1,6 @@
 number_of_points_per_side: 5
 target_frame: "base_link"
 populate_z: true
-use_defined_tf: false
 # This will be used for subscribed topic names and range sensor link name
 # Add or remove based on robot configuration
 range_sensors_name:

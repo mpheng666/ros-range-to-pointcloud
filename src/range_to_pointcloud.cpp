@@ -1,9 +1,8 @@
 #include "range_to_pointcloud/range_to_pointcloud.hpp"
 namespace range_to_pointcloud {
 
-    RangeToPointCloud::RangeToPointCloud(ros::NodeHandle& nh, int num)
+    RangeToPointCloud::RangeToPointCloud(ros::NodeHandle& nh)
         : nh_(nh)
-        , number_of_sensor_(num)
         , pub_timer_(nh_.createTimer(
           ros::Duration(0.05), &RangeToPointCloud::timerPubCallBack, this))
         , pointcloud_pub_(
@@ -56,11 +55,6 @@ namespace range_to_pointcloud {
                                     target_frame_)) {
             ROS_WARN_STREAM("target_frame"
                             << " is not set! Use default " << target_frame_);
-        }
-        if (!nh_.param<bool>("use_defined_tf", use_defined_tf_,
-                             use_defined_tf_)) {
-            ROS_WARN_STREAM("use_defined_tf"
-                            << " is not set! Use default " << use_defined_tf_);
         }
         if (!nh_.param<bool>("populate_z", populate_z_, populate_z_)) {
             ROS_WARN_STREAM("populate_z"
